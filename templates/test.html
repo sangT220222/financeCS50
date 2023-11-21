@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Test page
+{% endblock %}
+
+{% block main %}
+    {%if table_html %}
+        <div>
+            <h4> {{table_html}} </h4>
+            <h4> {{table2_html}} </h4>
+        </div>
+    {% endif %}
+    {%if user_balance_html %}
+        <div>
+            <h4> {{user_balance_html}} </h4>
+        </div>
+    {% endif %}
+
+{% endblock%}

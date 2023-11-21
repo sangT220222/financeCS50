@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Shares Number</th>
+                <th>Total Price</th>
+                <th>Balance after</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in table_html %}
+            <tr>
+                <td>{{row.stock_name}}</td>
+                <td>{{row.stock_name}}</td>
+                <td>{{row.stock_price_at_transaction | usd}}</td>
+                <td>{{row.shares_number}}</td>
+                <td>{{row.total_purchase_price | usd}}</td>
+                <td>{{row.balance_after | usd}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

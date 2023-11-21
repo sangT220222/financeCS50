@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+
+    <form action = "/sell" method = "post">
+        <label for="dropdown">Select a stock:</label>
+        <select id="dropdown" name="symbol">
+            {% for row in stock_table %}
+            <option >{{row.stock_name}}</option>
+            {%endfor%}
+
+        </select>
+
+        <div class="mb-3">
+            <input id="symbol" name="shares" placeholder="Shares number" type="text" class="form-control mx-auto w-auto">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Sell Shares</button>
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+CREATE TABLE transactions (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    stock_name TEXT,
+    stock_price_at_transaction FLOAT,
+    shares_number FLOAT,
+    total_purchase_price FLOAT,
+    balance_after FLOAT
+);
+
+CREATE TABLE homepage (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    stock_name TEXT,
+    stock_price_at_purchase FLOAT,
+    shares_number_bought FLOAT,
+    total_purchase_price FLOAT,
+    balance_after FLOAT
+);
+
+CREATE TABLE test AS
+SELECT stock_name, SUM(shares_number_bought) AS total_shares,SUM(total_purchase_price) as total
+FROM purchases
+WHERE user_id = 1
+GROUP BY stock_name;
+
+CREATE TABLE homepage (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    stock_symbol TEXT,
+    stock_name TEXT,
+    shares FLOAT,
+    price FLOAT,
+    total_purchase_price FLOAT,
+    balance_after FLOAT
+);
+
+UPDATE homepage
+SET user_id = 1, stock_symbol = "NFLX", stock_name = "FF", shares = 3.4, total_purchase_price = 33.4, balance_after = 55.0;
+
+INSERT into homepage
+(user_id, stock_symbol, stock_name, shares, total_purchase_price, balance_after) VALUES (1,'FF','FF',4.3,555.2,59595.3);
+
+UPDATE homepage
+SET shares = ( SELECT SUM(shares_number_bought) FROM purchases AS p WHERE p.stock_name = homepage.stock_symbol AND p.user_id = 1)
+;
+
+
+
+INSERT INTO homepage (user_id, stock_symbol, shares, price, total_purchase_price, balance_after)
+SELECT
+    p.user_id,
+    p.stock_name,
+    p.stock_price_at_purchase,
+    SUM(p.shares_number_bought),
+    SUM(p.total_purchase_price),
+    MIN(p.balance_after)
+FROM purchases AS p
+GROUP BY p.user_id, p.stock_name, p.stock_price_at_purchase
+ORDER BY balance_after DESC;
+

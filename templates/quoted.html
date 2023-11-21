@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Test page
+{% endblock %}
+
+{% block main %}
+    {%if stock %}
+        <div>
+            <p>A share of of {{stock["name"]}} costs {{stock["price"] | usd}} currently</p>
+        </div>
+
+    {% endif %}
+
+{% endblock%}
